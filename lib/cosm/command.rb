@@ -43,14 +43,6 @@ module Cosm
       @current_command = new_current_command
     end
 
-    def self.current_args
-      @current_args
-    end
-
-    def self.current_options
-      @current_options
-    end
-
     def self.global_options
       @global_options ||= []
     end
