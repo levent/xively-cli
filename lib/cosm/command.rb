@@ -86,13 +86,8 @@ module Cosm
       global_options << { :name => name, :args => args, :proc => blk }
     end
 
-    global_option :app, "--app APP", "-a" do |app|
-      raise OptionParser::InvalidOption.new(app) if app == "pp"
-    end
-
-    global_option :confirm, "--confirm APP"
+    global_option :key, "--key API_KEY", "-k"
     global_option :help,    "--help", "-h"
-    global_option :remote,  "--remote REMOTE"
 
     def self.prepare_run(cmd, args=[])
       command = parse(cmd)

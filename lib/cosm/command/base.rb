@@ -136,49 +136,6 @@ protected
     Cosm::Command.validate_arguments!
   end
 
-  def extract_app_in_dir(dir)
-    return unless remotes = git_remotes(dir)
-
-    if remote = options[:remote]
-      remotes[remote]
-    elsif remote = extract_app_from_git_config
-      remotes[remote]
-    else
-      apps = remotes.values.uniq
-      if apps.size == 1
-        apps.first
-      else
-        raise(Cosm::Command::CommandFailed, "Multiple apps in folder and no app specified.\nSpecify which app to use with --app <app name>")
-      end
-    end
-  end
-
-  def extract_app_from_git_config
-    remote = git("config cosm.remote")
-    remote == "" ? nil : remote
-  end
-
-  def git_remotes(base_dir=Dir.pwd)
-    remotes = {}
-    original_dir = Dir.pwd
-    Dir.chdir(base_dir)
-
-    return unless File.exists?(".git")
-    git("remote -v").split("\n").each do |remote|
-      name, url, method = remote.split(/\s/)
-      if url =~ /^git@#{cosm.host}:([\w\d-]+)\.git$/
-        remotes[name] = $1
-      end
-    end
-
-    Dir.chdir(original_dir)
-    if remotes.empty?
-      nil
-    else
-      remotes
-    end
-  end
-
   def escape(value)
     cosm.escape(value)
   end
