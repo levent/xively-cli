@@ -64,7 +64,7 @@ private
     size = (namespaces.map { |n| n[:name] }).map { |i| i.to_s.length }.sort.last
     namespaces.sort_by {|namespace| namespace[:name]}.each do |namespace|
       name = namespace[:name]
-      namespace[:description] ||= legacy_help_for_namespace(name)
+      namespace[:description]
       puts "  %-#{size}s  # %s" % [ name, namespace[:description] ]
     end
   end
@@ -89,7 +89,7 @@ private
       size = (namespace_commands.map { |c| c[:banner] }).map { |i| i.to_s.length }.sort.last
       namespace_commands.sort_by { |c| c[:banner].to_s }.each do |command|
         next if command[:help] =~ /DEPRECATED/
-        command[:summary] ||= legacy_help_for_command(command[:command])
+        command[:summary]
         puts "  %-#{size}s  # %s" % [ command[:banner], command[:summary] ]
       end
     end
@@ -97,7 +97,7 @@ private
 
   def help_for_command(name)
     if command_alias = Cosm::Command.command_aliases[name]
-      display("Alias: #{name} redirects to #{command_alias}")
+      puts("Alias: #{name} is short for #{command_alias}")
       name = command_alias
     end
     if command = commands[name]
@@ -105,9 +105,6 @@ private
 
       if command[:help].strip.length > 0
         puts command[:help].split("\n")[1..-1].join("\n")
-      else
-        puts
-        puts " " + legacy_help_for_command(name).to_s
       end
       puts
     end

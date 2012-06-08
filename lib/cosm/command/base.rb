@@ -15,29 +15,6 @@ class Cosm::Command::Base
     @options = options
   end
 
-  def app
-    @app ||= if options[:app].is_a?(String)
-      if confirm_mismatch?
-        raise Cosm::Command::CommandFailed, "Mismatch between --app and --confirm"
-      end
-      options[:app]
-    elsif options[:confirm].is_a?(String)
-      options[:confirm]
-    elsif app_from_dir = extract_app_in_dir(Dir.pwd)
-      app_from_dir
-    else
-      raise Cosm::Command::CommandFailed, "No app specified.\nRun this command from an app folder or specify which app to use with --app <app name>"
-    end
-  end
-
-  def api
-    Cosm::Auth.api
-  end
-
-  def cosm
-    Cosm::Auth.client
-  end
-
 protected
 
   def self.inherited(klass)
@@ -77,11 +54,6 @@ protected
   def self.alias_command(new, old)
     raise "no such command: #{old}" unless Cosm::Command.commands[old]
     Cosm::Command.command_aliases[new] = old
-  end
-
-  def extract_app
-    output_with_bang "Command::Base#extract_app has been deprecated. Please use Command::Base#app instead.  #{caller.first}"
-    app
   end
 
   #
@@ -162,10 +134,6 @@ protected
 
   def validate_arguments!
     Cosm::Command.validate_arguments!
-  end
-
-  def confirm_mismatch?
-    options[:confirm] && (options[:confirm] != options[:app])
   end
 
   def extract_app_in_dir(dir)

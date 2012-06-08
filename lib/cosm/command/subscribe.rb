@@ -26,7 +26,7 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
 
     unless api_key && feed_id && datastream_id
       puts Cosm::Command::Help.usage_for_command("subscribe")
-      exit
+      exit(1)
     end
 
     subscribe = "{\"method\":\"subscribe\", \"resource\":\"/feeds/#{feed_id}/datastreams/#{datastream_id}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
@@ -49,7 +49,6 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
   alias_command "sub", "subscribe"
 
   protected
-
 
   def parse_data(string, socket)
     puts(string)

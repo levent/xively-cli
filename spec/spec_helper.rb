@@ -8,12 +8,7 @@ end
 
 require "cosm/cli"
 require "rspec"
-# require "rr"
-# require "fakefs/safe"
-# require 'tmpdir'
 
-# WebMock::HttpLibAdapters::ExconAdapter.disable!
-#
 def execute(command_line)
   args = command_line.split(" ")
   command = args.shift
@@ -69,4 +64,19 @@ def capture_stdout(&block)
     $stdout = original_stdout
   end
   captured_stdout.string
+end
+
+def stub_tcp_socket
+  TCPSocket.stub(:new).and_return(MockTCPSocket.new)
+end
+
+class MockTCPSocket
+  def puts(msg)
+  end
+
+  def gets
+  end
+
+  def close
+  end
 end
