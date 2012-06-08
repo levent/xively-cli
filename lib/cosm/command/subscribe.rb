@@ -1,43 +1,9 @@
 require 'cosm/command/base'
-require 'eventmachine'
+require 'socket'
 
 # Subscribe to a datastream
 #
 class Cosm::Command::Subscribe < Cosm::Command::Base
-
-  module CosmSocket
-    attr_accessor :api_key, :feed_id, :datastream_id
-
-    def initialize(args)
-      @api_key = args[:key]
-      @feed_id = args[:feed]
-      @datastream_id = args[:datastream]
-    end
-
-    def post_init
-      puts "Starting Cosm Socket Connection"
-      subscribe = "{\"method\":\"subscribe\", \"resource\":\"/feeds/#{feed_id}/datastreams/#{datastream_id}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
-      send_data subscribe
-    end
-
-    def receive_data(data)
-      if STDOUT.isatty && ENV.has_key?("TERM")
-        puts(colorize(data))
-      else
-        puts(data)
-      end
-      if data =~ /"status":40/
-        close_connection
-        exit(1)
-      end
-    end
-
-    protected
-
-    def colorize(string)
-      string
-    end
-  end
 
   # subscribe
   #
@@ -53,22 +19,41 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
   #
   def index
     api_key = options[:key]
-    feed = options[:feed]
-    datastream = options[:datastream]
+    feed_id = options[:feed]
+    datastream_id = options[:datastream]
 
     validate_arguments!
 
-    unless api_key && feed && datastream
+    unless api_key && feed_id && datastream_id
       puts Cosm::Command::Help.usage_for_command("subscribe")
       exit
     end
 
-    EventMachine.run {
-      EventMachine::connect 'api.cosm.com', 8081, CosmSocket, options
-    }
+    subscribe = "{\"method\":\"subscribe\", \"resource\":\"/feeds/#{feed_id}/datastreams/#{datastream_id}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
+    s = TCPSocket.new 'api.cosm.com', 8081
+    s.puts subscribe
+    while line = s.gets
+      parse_data(line, s)
+    end
+    s.close
+
+    # EventMachine.run {
+    #   EventMachine::connect 'api.cosm.com', 8081, CosmSocket, options
+    # }
   end
 
   alias_command "sub", "subscribe"
+
+  protected
+
+
+  def parse_data(string, socket)
+    puts(string)
+    if string =~ /"status":40/
+      socket.close
+      exit(1)
+    end
+  end
 
 end
 
