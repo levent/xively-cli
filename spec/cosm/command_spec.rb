@@ -1,6 +1,5 @@
 require "spec_helper"
 require "cosm/command"
-require 'json' #FOR WEBMOCK
 
 class FakeResponse
 

@@ -1,6 +1,5 @@
 require 'cosm/command/base'
 require 'eventmachine'
-require 'json'
 
 # Subscribe to a datastream
 #
@@ -9,30 +8,27 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
   module CosmSocket
     attr_accessor :api_key, :feed_id, :datastream_id
 
-    API_KEY = "KBk8hhlOhDKrEsrHcMdzoTjfmLxRseZqUZKGyuAH3LRKXpgbr6tLeaGaSgNp_G3t4mp1eUa5dHDwMLd8YSyFzZAKomg_WvRE0vWxyqdlnirIqLVtB2axh399wSTZZMdP"
-
     def initialize(args)
       @api_key = args[:key]
       @feed_id = args[:feed]
       @datastream_id = args[:datastream]
     end
+
     def post_init
       puts "Starting Cosm Socket Connection"
-      subscribe = {
-        :method => 'subscribe',
-        :resource => "/feeds/#{feed_id}/datastreams/#{datastream_id}",
-        :headers => {
-          "X-ApiKey" => API_KEY
-        }
-      }
-      send_data subscribe.to_json
+      subscribe = "{\"method\":\"subscribe\", \"resource\":\"/feeds/#{feed_id}/datastreams/#{datastream_id}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
+      send_data subscribe
     end
 
     def receive_data(data)
       if STDOUT.isatty && ENV.has_key?("TERM")
-        puts(colorize(JSON.parse(data)))
+        puts(colorize(data))
       else
-        puts(chunk)
+        puts(data)
+      end
+      if data =~ /"status":40/
+        close_connection
+        exit(1)
       end
     end
 
