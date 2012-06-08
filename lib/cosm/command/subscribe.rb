@@ -40,6 +40,10 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
     # EventMachine.run {
     #   EventMachine::connect 'api.cosm.com', 8081, CosmSocket, options
     # }
+  rescue Interrupt => e
+    puts "Closing connection"
+    s.close
+    raise e
   end
 
   alias_command "sub", "subscribe"
