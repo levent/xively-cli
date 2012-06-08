@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.summary = "What this thing does"
 
-  s.add_dependency 'eventmachine'
+  s.add_dependency 'eventmachine', '0.12.10'
 end
