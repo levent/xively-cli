@@ -31,7 +31,7 @@ class Cosm::Command::Help < Cosm::Command::Base
 
   def self.usage_for_command(command)
     command = new.send(:commands)[command]
-    "Usage: cosm #{command[:banner]}" if command
+    "Usage: cosm #{command[:help]}" if command
   end
 
 private

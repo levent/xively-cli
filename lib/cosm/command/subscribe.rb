@@ -1,21 +1,22 @@
 require 'cosm/command/base'
 require 'socket'
 
-# Subscribe to a datastream via the Cosm PAWS (Socket Server)
+# Subscribe to a feed or datastream via the Cosm PAWS (Socket Server)
 #
 class Cosm::Command::Subscribe < Cosm::Command::Base
 
   # subscribe
   #
-  # connect to a tcp socket for a datastream
+  # connect to a tcp socket for a feed or datastream
   #
   # -k, --key API_KEY        # your api key
   # -f, --feed FEED          # the feed id
-  # -d, --datastream DATASTREAM  # the datastream id
+  # -d, --datastream DATASTREAM  # the datastream id (optional)
   #
   #Example:
   #
-  # $ cosm subscribe -k ABCD1234 -f 504 -d 0
+  # $ cosm subscribe -k ABCD1234 -f 504 -d 0 # subscribe to datastream
+  # $ cosm subscribe -k ABCD1234 -f 504 # subscribe to feed
   #
   def index
     api_key = options[:key]
@@ -24,12 +25,17 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
 
     validate_arguments!
 
-    unless api_key && feed_id && datastream_id
+    unless api_key && feed_id
       puts Cosm::Command::Help.usage_for_command("subscribe")
       exit(1)
     end
 
-    subscribe = "{\"method\":\"subscribe\", \"resource\":\"/feeds/#{feed_id}/datastreams/#{datastream_id}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
+    resource = "/feeds/#{feed_id}"
+    resource += "/datastreams/#{datastream_id}" if datastream_id
+
+    puts "Subscribing to updates for #{resource}"
+
+    subscribe = "{\"method\":\"subscribe\", \"resource\":\"#{resource}\", \"headers\":{\"X-ApiKey\":\"#{api_key}\"}}"
     s = TCPSocket.new 'api.cosm.com', 8081
     s.puts subscribe
     while line = s.gets

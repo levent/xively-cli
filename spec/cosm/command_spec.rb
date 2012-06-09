@@ -34,12 +34,12 @@ describe Cosm::Command do
 
   context "help" do
     it "works as a prefix" do
-      cosm("help subscribe").should =~ /connect to a tcp socket for a datastream/
+      cosm("help subscribe").should =~ /connect to a tcp socket for a feed or datastream/
     end
 
     it "works as an option" do
-      cosm("subscribe -h").should =~ /connect to a tcp socket for a datastream/
-      cosm("subscribe --help").should =~ /connect to a tcp socket for a datastream/
+      cosm("subscribe -h").should =~ /connect to a tcp socket for a feed or datastream/
+      cosm("subscribe --help").should =~ /connect to a tcp socket for a feed or datastream/
     end
   end
 

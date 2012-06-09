@@ -6,7 +6,7 @@ describe Cosm::Command::Help do
   describe "Help.usage_for_command" do
     it "returns the usage if the command exists" do
       usage = Cosm::Command::Help.usage_for_command("help")
-      usage.should == "Usage: cosm help [COMMAND]"
+      usage.should =~ /Usage: cosm  help \[COMMAND\]/
     end
 
     it "returns nil if command does not exist" do
@@ -35,7 +35,7 @@ describe Cosm::Command::Help do
       stderr, stdout = execute("subscribe --help")
       stderr.should == ""
       stdout.should include "Usage: cosm subscribe"
-      stdout.should include "connect to a tcp socket for a datastream"
+      stdout.should include "connect to a tcp socket for a feed or datastream"
       stdout.should_not include "Additional commands"
     end
 

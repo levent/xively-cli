@@ -11,13 +11,26 @@ describe Cosm::Command::Subscribe do
       @mock_sock = MockTCPSocket.new
     end
 
-    it "runs with options" do
-      TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
-      @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504/datastreams/0\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
-      @mock_sock.should_receive(:gets).and_return('stream of data', 'more dataz', nil)
-      stderr, stdout = execute("subscribe -k 1234 -f 504 -d 0")
-      stdout.should =~ /stream of data/
-      stdout.should =~ /more dataz/
+    context "datastream" do
+      it "runs with options" do
+        TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+        @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504/datastreams/0\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
+        @mock_sock.should_receive(:gets).and_return('stream of data', 'more dataz', nil)
+        stderr, stdout = execute("subscribe -k 1234 -f 504 -d 0")
+        stdout.should =~ /stream of data/
+          stdout.should =~ /more dataz/
+      end
+    end
+
+    context "feed" do
+      it "runs with options" do
+        TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+        @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
+        @mock_sock.should_receive(:gets).and_return('stream of data', 'more dataz', nil)
+        stderr, stdout = execute("subscribe -k 1234 -f 504")
+        stdout.should =~ /stream of data/
+          stdout.should =~ /more dataz/
+      end
     end
 
     it "should close socket if auth fails" do
@@ -42,9 +55,9 @@ describe Cosm::Command::Subscribe do
 
     it "should require all the options flags to be set" do
       stderr, stdout = execute("subscribe -k 1234 -d 0")
-      stdout.should =~ /Usage: cosm subscribe/
+      stdout.should =~ /Usage: cosm  subscribe/
+      stdout.should =~ /tcp/
     end
-
   end
 
 end
