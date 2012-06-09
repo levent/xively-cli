@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cosm (0.0.2)
+    cosm (0.0.3)
 
 GEM
   remote: http://rubygems.org/
