@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Levent Ali"]
   s.email = "lebreeze@gmail.com"
   s.license = "MIT"
-  s.files = Dir.glob("{lib}/**/*") + %w(LICENSE README.md)
+  s.files = Dir.glob("{lib}/**/*") + %w(LICENSE README.md bin/cosm)
   s.homepage = "https://github.com/levent/cosm"
   s.executables = ["cosm"]
   s.require_paths = ["lib"]
