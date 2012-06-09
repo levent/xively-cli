@@ -1,7 +1,7 @@
 require 'cosm/command/base'
 require 'socket'
 
-# Subscribe to a datastream
+# Subscribe to a datastream via the Cosm PAWS (Socket Server)
 #
 class Cosm::Command::Subscribe < Cosm::Command::Base
 

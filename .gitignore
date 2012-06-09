@@ -1,8 +1,15 @@
+# Mac stuff
 .DS_Store
-/.bundle
-/.rvmrc
-/coverage
-/pkg
-/rdoc
-/tags
-/vendor
+
+# Bundler
+.bundle
+
+# Simplecov
+coverage
+
+# Gem stuff
+pkg
+
+# Yard documentation
+doc
+.yardoc
