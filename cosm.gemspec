@@ -14,4 +14,6 @@ Gem::Specification.new do |s|
   s.executables = ["cosm"]
   s.require_paths = ["lib"]
   s.summary = "Provides a client to Cosm"
+
+  s.add_dependency "cosm-rb"
 end
