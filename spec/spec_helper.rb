@@ -80,3 +80,8 @@ class MockTCPSocket
   def close
   end
 end
+
+RSpec.configure do |config|
+  config.color_enabled = true
+  config.before { Cosm::Client.stub(:post) }
+end

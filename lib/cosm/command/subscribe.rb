@@ -26,7 +26,7 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
     validate_arguments!
 
     unless api_key && feed_id
-      puts Cosm::Command::Help.usage_for_command("subscribe")
+      $stderr.puts Cosm::Command::Help.usage_for_command("subscribe")
       exit(1)
     end
 

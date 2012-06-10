@@ -52,7 +52,7 @@ module Cosm
     end
 
     def self.shift_argument
-      @invalid_arguments.shift.downcase rescue nil
+      @invalid_arguments.shift rescue nil
     end
 
     def self.validate_arguments!

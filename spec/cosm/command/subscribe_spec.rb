@@ -55,8 +55,8 @@ describe Cosm::Command::Subscribe do
 
     it "should require all the options flags to be set" do
       stderr, stdout = execute("subscribe -k 1234 -d 0")
-      stdout.should =~ /Usage: cosm  subscribe/
-      stdout.should =~ /tcp/
+      stderr.should =~ /Usage: cosm  subscribe/
+      stderr.should =~ /tcp/
     end
   end
 
