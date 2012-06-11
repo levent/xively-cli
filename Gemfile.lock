@@ -2,12 +2,12 @@ PATH
   remote: .
   specs:
     cosm (0.0.3)
-      cosm-rb
+      cosm-rb (>= 0.0.3)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    cosm-rb (0.0.2)
+    cosm-rb (0.0.3)
       httparty (>= 0.8.3)
       nokogiri (>= 1.4.4)
       yajl-ruby (>= 0.8.1)
