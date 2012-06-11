@@ -28,7 +28,7 @@ PLATFORMS
 
 DEPENDENCIES
   cosm!
-  redcarpet
+  redcarpet (>= 2.1)
   rspec (>= 2.0)
   simplecov (>= 0.6)
-  yard
+  yard (>= 0.8)
