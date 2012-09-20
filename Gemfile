@@ -9,6 +9,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec', '>= 2.0'
+  gem 'rspec', '>= 2.11'
   gem 'simplecov', '>= 0.6'
 end
