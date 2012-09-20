@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.summary = "Provides a client to Cosm"
 
-  s.add_dependency "cosm-rb", ">= 0.0.3"
+  s.add_dependency "cosm-rb", ">= 0.2"
 end
