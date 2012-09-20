@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     cosm (0.0.5)
-      cosm-rb (>= 0.0.3)
+      cosm-rb (>= 0.2)
 
 GEM
   remote: http://rubygems.org/
