@@ -43,6 +43,8 @@ class Cosm::Command::Subscribe < Cosm::Command::Base
     end
     s.close
 
+    puts "Connection closed"
+
     # EventMachine.run {
     #   EventMachine::connect 'api.cosm.com', 8081, CosmSocket, options
     # }
