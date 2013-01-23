@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cosm (0.0.5)
+    cosm (0.0.6)
       cosm-rb (>= 0.2)
 
 GEM
