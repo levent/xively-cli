@@ -4,11 +4,11 @@ gemspec
 
 group :development do
   gem 'rake'
-  gem 'yard', '>= 0.8'
-  gem 'redcarpet', '>= 2.1'
+  gem 'yard'
+  gem 'redcarpet'
 end
 
 group :test do
-  gem 'rspec', '>= 2.11'
-  gem 'simplecov', '>= 0.6'
+  gem 'rspec'
+  gem 'simplecov'
 end
