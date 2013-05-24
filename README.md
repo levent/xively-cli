@@ -2,8 +2,8 @@
 
 A Xively client tool
 
-[![Build Status](https://secure.travis-ci.org/levent/xively.png)](http://travis-ci.org/levent/xively)
-[![Dependency Status](https://gemnasium.com/levent/xively.png)](https://gemnasium.com/levent/xively)
+[![Build Status](https://secure.travis-ci.org/levent/xively-cli.png)](http://travis-ci.org/levent/xively-cli)
+[![Dependency Status](https://gemnasium.com/levent/xively-cli.png)](https://gemnasium.com/levent/xively-cli)
 
 ## Installation
 
