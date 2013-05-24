@@ -1,7 +1,7 @@
 require 'xively/command/base'
 require 'socket'
 
-# Subscribe to a feed or datastream via the Xively PAWS (Socket Server)
+# Subscribe to a feed or datastream via the Xively Socket Server
 #
 class Xively::Command::Subscribe < Xively::Command::Base
 
