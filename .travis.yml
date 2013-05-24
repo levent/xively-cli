@@ -1,13 +1,5 @@
 bundler_args: --without development
 script: bundle exec rspec -bfs spec
-matrix:
-  allow_failures:
-    - rvm: jruby
-    - rvm: rbx
-    - rvm: ree
 rvm:
   - 1.9.2
   - 1.9.3
-  - jruby
-  - rbx
-  - ree
