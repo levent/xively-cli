@@ -1,8 +1,8 @@
 require "spec_helper"
-require "cosm/command/feeds"
-require "cosm-rb"
+require "xively/command/feeds"
+require "xively-rb"
 
-describe Cosm::Command::Feeds do
+describe Xively::Command::Feeds do
 
   describe "create" do
     it "should require a title" do
@@ -13,22 +13,22 @@ describe Cosm::Command::Feeds do
 
     it "should require an api key" do
       stderr, stdout = execute("feeds:create monitor")
-      stderr.should =~ /Usage: cosm  feeds:create/
+      stderr.should =~ /Usage: xively  feeds:create/
     end
 
     it "should should create a feed" do
-      feed = Cosm::Feed.new
+      feed = Xively::Feed.new
       feed.title = 'Monitor'
-      response = mock(HTTParty::Response, :code => 201, :headers => {'location' => 'http://cosm.com/feeds/504'})
+      response = mock(HTTParty::Response, :code => 201, :headers => {'location' => 'http://xively.com/feeds/504'})
 
-      Cosm::Client.should_receive(:post).with(
+      Xively::Client.should_receive(:post).with(
         '/v2/feeds.json',
         :headers => {'X-ApiKey' => '1234'},
         :body => feed.to_json).and_return(response)
       stderr, stdout = execute("feeds:create Monitor -k 1234")
       stderr.should == ""
       stdout.should =~ /Creating feed \"Monitor\"\.\.\./
-      stdout.should =~ /http:\/\/cosm\.com\/feeds\/504/
+      stdout.should =~ /http:\/\/xively\.com\/feeds\/504/
     end
   end
 

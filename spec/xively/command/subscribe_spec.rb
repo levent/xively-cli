@@ -1,7 +1,7 @@
 require "spec_helper"
-require "cosm/command/subscribe"
+require "xively/command/subscribe"
 
-describe Cosm::Command::Subscribe do
+describe Xively::Command::Subscribe do
   before do
     stub_tcp_socket
   end
@@ -13,7 +13,7 @@ describe Cosm::Command::Subscribe do
 
     context "datastream" do
       it "runs with options" do
-        TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+        TCPSocket.should_receive(:new).with('api.xively.com', 8081).and_return @mock_sock
         @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504/datastreams/0\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
         @mock_sock.should_receive(:gets).and_return('stream of data', 'more dataz', nil)
         stderr, stdout = execute("subscribe -k 1234 -f 504 -d 0")
@@ -24,7 +24,7 @@ describe Cosm::Command::Subscribe do
 
     context "feed" do
       it "runs with options" do
-        TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+        TCPSocket.should_receive(:new).with('api.xively.com', 8081).and_return @mock_sock
         @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
         @mock_sock.should_receive(:gets).and_return('stream of data', 'more dataz', nil)
         stderr, stdout = execute("subscribe -k 1234 -f 504")
@@ -34,7 +34,7 @@ describe Cosm::Command::Subscribe do
     end
 
     it "should close socket if auth fails" do
-      TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+      TCPSocket.should_receive(:new).with('api.xively.com', 8081).and_return @mock_sock
       @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504/datastreams/0\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
       @mock_sock.should_receive(:gets).and_return("\"status\":403")
       @mock_sock.should_receive(:close)
@@ -43,7 +43,7 @@ describe Cosm::Command::Subscribe do
 
     it "should close socket if interrupted (Ctrl-c)" do
       begin
-        TCPSocket.should_receive(:new).with('api.cosm.com', 8081).and_return @mock_sock
+        TCPSocket.should_receive(:new).with('api.xively.com', 8081).and_return @mock_sock
         @mock_sock.should_receive(:puts).with("{\"method\":\"subscribe\", \"resource\":\"/feeds/504/datastreams/0\", \"headers\":{\"X-ApiKey\":\"1234\"}}")
         @mock_sock.should_receive(:gets).and_raise(Interrupt)
         @mock_sock.should_receive(:close)
@@ -55,7 +55,7 @@ describe Cosm::Command::Subscribe do
 
     it "should require all the options flags to be set" do
       stderr, stdout = execute("subscribe -k 1234 -d 0")
-      stderr.should =~ /Usage: cosm  subscribe/
+      stderr.should =~ /Usage: xively  subscribe/
       stderr.should =~ /tcp/
     end
   end

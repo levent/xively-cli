@@ -1,7 +1,7 @@
-require 'cosm/version'
+require 'xively/version'
 require "optparse"
 
-module Cosm
+module Xively
   module Command
     class CommandFailed  < RuntimeError; end
 
@@ -96,7 +96,7 @@ module Cosm
         if %w( -v --version ).include?(cmd)
           command = parse('version')
         else
-          $stderr.puts(["`#{cmd}` is not a cosm command.", "See `cosm help` for a list of available commands."].join("\n"))
+          $stderr.puts(["`#{cmd}` is not a xively command.", "See `xively help` for a list of available commands."].join("\n"))
           exit(1)
         end
       end

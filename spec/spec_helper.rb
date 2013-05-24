@@ -6,15 +6,15 @@ SimpleCov.start do
   add_filter "/spec/"
 end
 
-require "cosm/cli"
+require "xively/cli"
 require "rspec"
 
 def execute(command_line)
   args = command_line.split(" ")
   command = args.shift
 
-  Cosm::Command.load
-  object, method = Cosm::Command.prepare_run(command, args)
+  Xively::Command.load
+  object, method = Xively::Command.prepare_run(command, args)
 
   original_stdin, original_stderr, original_stdout = $stdin, $stderr, $stdout
 
@@ -27,7 +27,7 @@ def execute(command_line)
   rescue SystemExit
   ensure
     $stdin, $stderr, $stdout = original_stdin, original_stderr, original_stdout
-    Cosm::Command.current_command = nil
+    Xively::Command.current_command = nil
   end
 
   [captured_stderr.string, captured_stdout.string]
@@ -36,13 +36,13 @@ end
 def run(command_line)
   capture_stdout do
     begin
-      Cosm::CLI.start(*command_line.split(" "))
+      Xively::CLI.start(*command_line.split(" "))
     rescue SystemExit
     end
   end
 end
 
-alias cosm run
+alias xively run
 
 def capture_stderr(&block)
   original_stderr = $stderr
@@ -83,5 +83,5 @@ end
 
 RSpec.configure do |config|
   config.color_enabled = true
-  config.before { Cosm::Client.stub(:post) }
+  config.before { Xively::Client.stub(:post) }
 end

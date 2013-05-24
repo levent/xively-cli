@@ -1,7 +1,7 @@
 require "fileutils"
-require "cosm/command"
+require "xively/command"
 
-class Cosm::Command::Base
+class Xively::Command::Base
 
   def self.namespace
     self.to_s.split("::").last.downcase
@@ -18,10 +18,10 @@ class Cosm::Command::Base
 protected
 
   def self.inherited(klass)
-    unless klass == Cosm::Command::Base
+    unless klass == Xively::Command::Base
       help = extract_help_from_caller(caller.first)
 
-      Cosm::Command.register_namespace(
+      Xively::Command.register_namespace(
         :name => klass.namespace,
         :description => help.first
       )
@@ -29,7 +29,7 @@ protected
   end
 
   def self.method_added(method)
-    return if self == Cosm::Command::Base
+    return if self == Xively::Command::Base
     return if private_method_defined?(method)
     return if protected_method_defined?(method)
 
@@ -38,7 +38,7 @@ protected
     command = [ self.namespace, resolved_method ].compact.join(":")
     banner = extract_banner(help) || command
 
-    Cosm::Command.register_command(
+    Xively::Command.register_command(
       :klass       => self,
       :method      => method,
       :namespace   => self.namespace,
@@ -52,8 +52,8 @@ protected
   end
 
   def self.alias_command(new, old)
-    raise "no such command: #{old}" unless Cosm::Command.commands[old]
-    Cosm::Command.command_aliases[new] = old
+    raise "no such command: #{old}" unless Xively::Command.commands[old]
+    Xively::Command.command_aliases[new] = old
   end
 
   #
@@ -75,7 +75,7 @@ protected
 
   def self.extract_help(file, line_number)
     buffer = []
-    lines = Cosm::Command.files[file]
+    lines = Xively::Command.files[file]
 
     (line_number.to_i-2).downto(0) do |i|
       line = lines[i]
@@ -117,7 +117,7 @@ protected
   end
 
   def current_command
-    Cosm::Command.current_command
+    Xively::Command.current_command
   end
 
   def extract_option(key)
@@ -125,23 +125,23 @@ protected
   end
 
   def invalid_arguments
-    Cosm::Command.invalid_arguments
+    Xively::Command.invalid_arguments
   end
 
   def shift_argument
-    Cosm::Command.shift_argument
+    Xively::Command.shift_argument
   end
 
   def validate_arguments!
-    Cosm::Command.validate_arguments!
+    Xively::Command.validate_arguments!
   end
 
   def escape(value)
-    cosm.escape(value)
+    xively.escape(value)
   end
 end
 
-module Cosm::Command
+module Xively::Command
   unless const_defined?(:BaseWithApp)
     BaseWithApp = Base
   end
