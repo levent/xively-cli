@@ -1,14 +1,14 @@
 require "spec_helper"
-require "cosm/command/version"
+require "xively/command/version"
 
-module Cosm::Command
+module Xively::Command
   describe Version do
 
     it "shows version info" do
       stderr, stdout = execute("version")
       stderr.should == ""
       stdout.should == <<-STDOUT
-#{Cosm::VERSION}
+#{Xively::VERSION}
 STDOUT
     end
 

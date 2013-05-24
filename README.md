@@ -1,14 +1,14 @@
-# Cosm CLI
+# Xively CLI
 
-A Cosm client tool
+A Xively client tool
 
-[![Build Status](https://secure.travis-ci.org/levent/cosm.png)](http://travis-ci.org/levent/cosm)
-[![Dependency Status](https://gemnasium.com/levent/cosm.png)](https://gemnasium.com/levent/cosm)
+[![Build Status](https://secure.travis-ci.org/levent/xively.png)](http://travis-ci.org/levent/xively)
+[![Dependency Status](https://gemnasium.com/levent/xively.png)](https://gemnasium.com/levent/xively)
 
 ## Installation
 
 ```bash
-gem install cosm
+gem install xively
 ```
 
 ## Usage
@@ -18,6 +18,6 @@ gem install cosm
 You can connect to a feed or datastream and receive realtime json updates in your terminal
 
 ```bash
-cosm subscribe -k YOUR_API_KEY -f FEED_ID -d DATASTREAM_ID
+xively subscribe -k YOUR_API_KEY -f FEED_ID -d DATASTREAM_ID
 ```
 
