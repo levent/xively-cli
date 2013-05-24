@@ -1,6 +1,6 @@
 # list commands and display help
 #
-class Cosm::Command::Help < Cosm::Command::Base
+class Xively::Command::Help < Xively::Command::Base
 
   PRIMARY_NAMESPACES = %w( subscribe )
 
@@ -10,10 +10,10 @@ class Cosm::Command::Help < Cosm::Command::Base
   #
   #Examples:
   #
-  # $ cosm help
-  # Usage: cosm COMMAND [--key API_KEY] [command-specific-options]
+  # $ xively help
+  # Usage: xively COMMAND [--key API_KEY] [command-specific-options]
   #
-  # Primary help topics, type "cosm help TOPIC" for more details:
+  # Primary help topics, type "xively help TOPIC" for more details:
   #
   #   subscribe    #  subscribe to a datastream
   #   ...
@@ -31,25 +31,25 @@ class Cosm::Command::Help < Cosm::Command::Base
 
   def self.usage_for_command(command)
     command = new.send(:commands)[command]
-    "Usage: cosm #{command[:help]}" if command
+    "Usage: xively #{command[:help]}" if command
   end
 
 private
 
   def commands_for_namespace(name)
-    Cosm::Command.commands.values.select do |command|
+    Xively::Command.commands.values.select do |command|
       command[:namespace] == name && command[:command] != name
     end
   end
 
   def namespaces
-    namespaces = Cosm::Command.namespaces
+    namespaces = Xively::Command.namespaces
     namespaces.delete("app")
     namespaces
   end
 
   def commands
-    Cosm::Command.commands
+    Xively::Command.commands
   end
 
   def primary_namespaces
@@ -70,9 +70,9 @@ private
   end
 
   def help_for_root
-    puts "Usage: cosm COMMAND [--key API_KEY] [command-specific-options]"
+    puts "Usage: xively COMMAND [--key API_KEY] [command-specific-options]"
     puts
-    puts "Primary help topics, type \"cosm help TOPIC\" for more details:"
+    puts "Primary help topics, type \"xively help TOPIC\" for more details:"
     puts
     summary_for_namespaces(primary_namespaces)
     puts
@@ -96,12 +96,12 @@ private
   end
 
   def help_for_command(name)
-    if command_alias = Cosm::Command.command_aliases[name]
+    if command_alias = Xively::Command.command_aliases[name]
       puts("Alias: #{name} is short for #{command_alias}")
       name = command_alias
     end
     if command = commands[name]
-      puts "Usage: cosm #{command[:banner]}"
+      puts "Usage: xively #{command[:banner]}"
 
       if command[:help].strip.length > 0
         puts command[:help].split("\n")[1..-1].join("\n")
@@ -110,12 +110,12 @@ private
     end
 
     if commands_for_namespace(name).size > 0
-      puts "Additional commands, type \"cosm help COMMAND\" for more details:"
+      puts "Additional commands, type \"xively help COMMAND\" for more details:"
       puts
       help_for_namespace(name)
       puts
     elsif command.nil?
-      puts "#{name} is not a cosm command. See `cosm help`."
+      puts "#{name} is not a xively command. See `xively help`."
     end
   end
 end

@@ -1,19 +1,19 @@
-require 'cosm/command/base'
-require 'cosm-rb'
+require 'xively/command/base'
+require 'xively-rb'
 
-# Create a Cosm feed
+# Create a Xively feed
 #
-class Cosm::Command::Feeds < Cosm::Command::Base
+class Xively::Command::Feeds < Xively::Command::Base
 
   # feeds:create [TITLE]
   #
-  # create a Cosm feed
+  # create a Xively feed
   #
   # -k, --key API_KEY     # your api key
   #
   #Examples:
   #
-  # $ cosm feeds:create "Home energy monitor" -k ABCD1234
+  # $ xively feeds:create "Home energy monitor" -k ABCD1234
   #
   def create
     title = shift_argument
@@ -26,16 +26,16 @@ class Cosm::Command::Feeds < Cosm::Command::Base
     end
 
     if api_key.nil?
-      $stderr.puts Cosm::Command::Help.usage_for_command("feeds:create")
+      $stderr.puts Xively::Command::Help.usage_for_command("feeds:create")
       exit(1)
     end
 
     puts "Creating feed \"#{title}\"..."
 
-    feed = Cosm::Feed.new
+    feed = Xively::Feed.new
     feed.title = title
 
-    response = Cosm::Client.post('/v2/feeds.json', :headers => {'X-ApiKey' => api_key}, :body => feed.to_json)
+    response = Xively::Client.post('/v2/feeds.json', :headers => {'X-ApiKey' => api_key}, :body => feed.to_json)
     if response.code == 201
       puts "Your feed has been created at:"
       puts response.headers['location']

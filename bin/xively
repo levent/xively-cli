@@ -10,8 +10,8 @@ begin
   $:.unshift File.expand_path("../../lib", bin_file)
 
   # start up the CLI
-  require "cosm/cli"
-  Cosm::CLI.start(*ARGV)
+  require "xively/cli"
+  Xively::CLI.start(*ARGV)
 rescue Interrupt
   `stty icanon echo`
   puts("\n !    Command cancelled.")
