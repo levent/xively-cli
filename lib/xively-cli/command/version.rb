@@ -1,5 +1,5 @@
-require "xively/command/base"
-require "xively/version"
+require "xively-cli/command/base"
+require "xively-cli/version"
 
 # display version
 #

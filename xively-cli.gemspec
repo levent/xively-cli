@@ -1,10 +1,10 @@
 $:.unshift File.expand_path("../lib", __FILE__)
-require 'xively/version'
+require 'xively-cli/version'
 
 Gem::Specification.new do |s|
-  s.name = "xively"
+  s.name = "xively-cli"
   s.description = "Xively CLI"
-  s.version = Xively::VERSION
+  s.version = Xively::CLI::VERSION
 
   s.authors = ["Levent Ali"]
   s.email = "lebreeze@gmail.com"

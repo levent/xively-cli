@@ -6,7 +6,7 @@ SimpleCov.start do
   add_filter "/spec/"
 end
 
-require "xively/cli"
+require "xively-cli"
 require "rspec"
 
 def execute(command_line)

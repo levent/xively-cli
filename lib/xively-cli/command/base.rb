@@ -1,5 +1,5 @@
 require "fileutils"
-require "xively/command"
+require "xively-cli/command"
 
 class Xively::Command::Base
 

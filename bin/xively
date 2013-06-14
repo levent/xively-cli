@@ -10,7 +10,7 @@ begin
   $:.unshift File.expand_path("../../lib", bin_file)
 
   # start up the CLI
-  require "xively/cli"
+  require "xively-cli"
   Xively::CLI.start(*ARGV)
 rescue Interrupt
   `stty icanon echo`

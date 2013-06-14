@@ -1,4 +1,4 @@
-require 'xively/command/base'
+require 'xively-cli/command/base'
 require 'socket'
 
 # Subscribe to a feed or datastream via the Xively Socket Server

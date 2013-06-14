@@ -1,4 +1,4 @@
-require 'xively/version'
+require 'xively-cli/version'
 require "optparse"
 
 module Xively

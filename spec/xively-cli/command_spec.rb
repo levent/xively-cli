@@ -1,5 +1,5 @@
 require "spec_helper"
-require "xively/command"
+require "xively-cli/command"
 
 class FakeResponse
 
@@ -24,8 +24,8 @@ describe Xively::Command do
     class Xively::Command::Test; end
     class Xively::Command::Test::Multiple; end
 
-    require "xively/command/help"
-    require "xively/command/subscribe"
+    require "xively-cli/command/help"
+    require "xively-cli/command/subscribe"
 
     Xively::Command.parse("unknown").should be_nil
     Xively::Command.parse("subscribe").should include(:klass => Xively::Command::Subscribe, :method => :index)

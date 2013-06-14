@@ -1,5 +1,5 @@
 require "spec_helper"
-require "xively/command/subscribe"
+require "xively-cli/command/subscribe"
 
 describe Xively::Command::Subscribe do
   before do

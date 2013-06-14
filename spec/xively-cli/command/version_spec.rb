@@ -1,5 +1,5 @@
 require "spec_helper"
-require "xively/command/version"
+require "xively-cli/command/version"
 
 module Xively::Command
   describe Version do

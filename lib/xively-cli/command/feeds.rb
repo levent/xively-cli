@@ -1,4 +1,4 @@
-require 'xively/command/base'
+require 'xively-cli/command/base'
 require 'xively-rb'
 
 # Create a Xively feed

@@ -1,5 +1,5 @@
 require "spec_helper"
-require "xively/command/feeds"
+require "xively-cli/command/feeds"
 require "xively-rb"
 
 describe Xively::Command::Feeds do

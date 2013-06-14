@@ -1,6 +1,6 @@
 require "spec_helper"
-require "xively/command/subscribe"
-require "xively/command/help"
+require "xively-cli/command/subscribe"
+require "xively-cli/command/help"
 
 describe Xively::Command::Help do
   describe "Help.usage_for_command" do
