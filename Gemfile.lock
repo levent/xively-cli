@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    xively-cli (0.0.8)
+    xively-cli (0.0.9)
       xively-rb (>= 0.2)
 
 GEM

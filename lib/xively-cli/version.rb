@@ -1,5 +1,5 @@
 module Xively
   class CLI
-    VERSION = "0.0.8"
+    VERSION = "0.0.9"
   end
 end
