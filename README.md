@@ -4,6 +4,7 @@ A Xively client tool
 
 [![Build Status](https://secure.travis-ci.org/levent/xively-cli.png)](http://travis-ci.org/levent/xively-cli)
 [![Dependency Status](https://gemnasium.com/levent/xively-cli.png)](https://gemnasium.com/levent/xively-cli)
+[![Coverage Status](https://coveralls.io/repos/levent/xively-cli/badge.png)](https://coveralls.io/r/levent/xively-cli)
 
 ## Installation
 

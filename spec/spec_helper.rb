@@ -8,6 +8,8 @@ end
 
 require "xively-cli"
 require "rspec"
+require 'coveralls'
+Coveralls.wear!
 
 def execute(command_line)
   args = command_line.split(" ")
